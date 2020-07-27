@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>match form</title>
+</head>
+<body>
+{% block content %}
+    <h4 style="text-align: center">Create a match between two teams</h4>
+    <div class="container">
+        <div class="row">
+            <div class="offset-3 col-4">
+                <form action="{% url 'cricket_application:save_match' %}" method="post">
+                    {% csrf_token %}
+                    <label for="match_number">Match ID :</label>
+                    <input type="number" id="match_number" name="match_id" class="form-control" required="True">
+
+                    <label for="match_type">Match Type :</label>
+                    <select id="match_type" name="match_type" class="form-control">
+                        <option>TEST</option>
+                        <option>ODI</option>
+                        <option>T20</option>
+                    </select>
+
+                    <label for="TeamA">Team A :</label>
+                    <select name="TeamA" id="TeamA" class="form-control">
+                        {% for team in teamlist %}
+                            <option>{{ team }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="TeamB"> Team B :</label>
+                    <select name="TeamB" id="TeamB" class="form-control">
+                        {% for team in teamlist %}
+                            <option>{{ team }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label for="venue"> Match Venue :</label>
+                    <input type="text" id="venue" name="match_venue" class="form-control" required="True">
+
+                    <label for="date"> Match Date :</label>
+                    <input type="datetime-local" id="date" name="match_date" class="form-control" required="True">
+                    <br>
+                    <center>
+                        <input type="submit" value="Create Match" class="btn btn-success">
+                        <a href="{% url 'cricket_application:MatchFixtures' %}" type="button" class="btn btn-primary">Show
+                            Fixtures</a>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+</body>
+</html>

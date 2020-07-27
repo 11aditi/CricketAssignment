@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+<html>
+<head>
+    {% block title %}
+        <title>Team</title>
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+
+    <div class="container">
+
+        <h3 align="center">List of Cricket Teams</h3>
+
+        <div class="row mt-4">
+            {% if teams %}
+                {% for i in teams %}
+                    <div class="col-sm-4">
+                        <a href="{{ i.team_id }}/">
+                            <img src="{{ i.team_logo.url }}" alt={{ i.team_name }} class="img-circle" width="70"
+                                 height="70">
+                        </a>
+
+                        <strong><a href="{{ i.team_id }}/">{{ i.team_name }}</a></strong>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>No Teams Created</h2><br>
+                <a href="/admin/">
+                    <button class="ml-5 btn btn-warning">Create here</button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

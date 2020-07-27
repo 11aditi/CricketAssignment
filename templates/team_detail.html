@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+<html>
+<head>
+    {% block title %}
+        <title>Players</title>
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col" align="right">
+                <img src="{{ team.team_logo.url }}" width="90" height="90">
+            </div>
+            <div class="col">
+                <h2 class="mt-4">{{ team.team_name }}</h2>
+            </div>
+        </div>
+        {% if team.cricketplayer_set.all %}
+            <table class="table table-border mt-3">
+                <thead>
+                <tr>
+                    <th>Player Image</th>
+                    <th>Player Name</th>
+                    <th>Jersy Number</th>
+                    <th>Country</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for player in team.cricketplayer_set.all %}
+                    <tr>
+                        <td><a href="{% url 'cricket_application:player_detail' player.player_id %}">
+                            <img src="{{ player.player_image.url }}" alt="Player Image" height="42" width="42"></a></td>
+                        <td>
+                            <a href="{% url 'cricket_application:player_detail' player.player_id %}">{{ player.last_name }} {{ player.first_name }}</a>
+                        </td>
+                        <td>{{ player.jersey_number }}</td>
+                        <td>{{ player.country.name|upper }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <h3>No data available</h3>
+        {% endif %}
+    </div>
+{% endblock content %}
+</body>
+</html>

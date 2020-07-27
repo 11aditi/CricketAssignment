@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="offset-3 col-6">
+                {% if points %}
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Team Name</th>
+                            <th>Matches</th>
+                            <th>Won</th>
+                            <th>Lost</th>
+                            <th>Tied</th>
+                            <th>Points</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for team in points %}
+                            <tr>
+                                <td>{{ team.team.team_name }}</td>
+                                <td>{{ team.matches_played }}</td>
+                                <td>{{ team.matches_won }}</td>
+                                <td>{{ team.matches_lost }}</td>
+                                <td>{{ team.matches_tied }}</td>
+                                <td>{{ team.points }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <h3>No data available</h3>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

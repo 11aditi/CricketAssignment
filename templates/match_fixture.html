@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="container">
+        <h2 align="center">Match Fixtures</h2>
+        <div class="row">
+            {% if matches %}
+                <table class="table table-border">
+                    <thead>
+                    <tr>
+                        <th>Match Type</th>
+                        <th>Teams</th>
+                        <th>Match Date</th>
+                        <th>Match Location</th>
+                        <th>Match Winner</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for match in matches %}
+                        <tr>
+                            <td>{{ match.match_type }}</td>
+                            <td>{{ match.teamA }} <b>X</b> {{ match.teamB }}</td>
+                            <td>{{ match.match_date }}</td>
+                            <td>{{ match.match_venue }}</td>
+                            <td>{{ match.match_winner }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <h3>No matches scheduled..</h3>
+            {% endif %}
+        </div>
+        <a href="{% url 'cricket_application:matches_create' %}">Create another match</a>
+    </div>
+
+{% endblock %}

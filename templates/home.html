@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2 align="center">INTERNATIONAL CRICKET COUNCIL</h2>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col card">
+                <div class="card-header text-center bg-cyan text-white">
+                    <h3><a href="teams/">CRICKET TEAMS</a></h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4>No of Teams created: {{ teams_count }}</h4>
+                </div>
+            </div>
+            <div class="col card">
+                <div class="card-header text-center bg-cyan text-white">
+                    <h3><a href="matches/">CREATE MATCH</a></h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4>No of matches scheduled: {{ matches_count }}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col card">
+                <div class="card-header text-center bg-cyan text-white">
+                    <h3><a href="MatchFixtures/">SHOW MATCH FIXTURES</a></h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4>Matches completed: {{ match_com }}</h4>
+                </div>
+            </div>
+            <div class="col card">
+                <div class="card-header text-center bg-cyan text-white">
+                    <h3><a href="points_table/">POINTS TABLE</a></h3>
+                </div>
+                <div class="card-body text-center">
+                    <h4>Matches not completed: {{ match_ncom }}</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+{% endblock %}
+
+
+
+
+{% comment %}
+<h2>Points table</h2>
+<ul>
+    {% for point in points %}
+    Team <b>{{ point.team.name }}:</b>
+    Points <b>{{ point.points}}</b>
+    <br>
+    {% empty %}
+    No data available.
+    {% endfor %}
+</ul>
+
+<h2>Matches</h2>
+<a href="matches/">Set up a match</a>
+
+<ul>
+{% for match in matches %}
+    <li>
+        Match Number <b><a href="{% url 'cricpro:matches_detail' match.id %}">{{ match.match_number }}</a>  </b>
+        <ul>
+            <li>
+            Teams playing this match:
+            {% for team in match.teams.all %}
+            {{ forloop.counter }}. Team <b>{{ team.name }}</b>
+            {% empty %}
+                No teams playing yet.
+            {% endfor %}
+            </li>
+        </ul>
+    </li>
+{% empty %}
+    <p>No match exist.</p>
+{% endfor %}
+</ul>
+
+<div class="">
+    <span class="">
+        {% if matches.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ matches.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="">
+            This is the page #{{ matches.number }} out of {{ matches.paginator.num_pages }}
+        </span>
+
+        {% if matches.has_next %}
+                <a href="?page={{ matches.next_page_number }}">next</a>
+                <a href="?page={{ matches.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>{% endcomment %}
